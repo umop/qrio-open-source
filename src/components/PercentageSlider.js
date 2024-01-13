@@ -114,48 +114,46 @@ const PercentageSlider = ({ claimId }) => {
 
     return (
         <div className={styles.sliderContainer}>
-    
-                <>
+            <>
                 <Modal
-    title="Login Required"
-    visible={isModalVisible}
-    onOk={handleOk}
-    onCancel={() => setIsModalVisible(false)}
-    okText="Login"
-    cancelText="Cancel"
->
-    <p>Please log in to adjust the slider.</p>
-</Modal>
-                    <div className={styles.sliderLabel}>
-                        <div className={styles.sliderLabelSideA}>0% Likelihood of being True</div>
-                        <span className={styles.slidervalue}>{sliderValue}%</span>
-                        <div className={styles.sliderLabelSideB}>100% Likelihood of being True</div>
-                    </div>
-                    <div className={styles.sliderWrapper} ref={sliderWrapperRef} style={{ position: 'relative' }}>
+                    title="Login Required"
+                    visible={isModalVisible}
+                    onOk={handleOk}
+                    onCancel={() => setIsModalVisible(false)}
+                    okText="Login"
+                    cancelText="Cancel">
+                    <p>Please log in to adjust the slider.</p>
+                </Modal>
+                <div className={styles.sliderLabel}>
+                    <div className={styles.sliderLabelSideA}>0% Likelihood of being True</div>
+                    <span className={styles.slidervalue}>{sliderValue}%</span>
+                    <div className={styles.sliderLabelSideB}>100% Likelihood of being True</div>
+                </div>
+                <div className={styles.sliderWrapper} ref={sliderWrapperRef} style={{ position: 'relative' }}>
+                    <input
+                        type="range"
+                        min="0"
+                        max="100"
+                        value={sliderValue}
+                        onMouseDown={handleSliderMouseDown}
+                        onChange={handleSliderChange}
+                        className={styles.slider}
+                    />
+                </div>
+                {average !== null && (
+                    <div className={styles.sliderWrapper} style={{ position: 'relative' }}>
                         <input
                             type="range"
                             min="0"
                             max="100"
-                            value={sliderValue}
-                            onMouseDown={handleSliderMouseDown}
-                            onChange={handleSliderChange}
-                            className={styles.slider}
+                            value={average}
+                            className={`${styles.averageSlider}`}
+                            readOnly
                         />
+                        <div className={styles.averageLabel}><p>Average Response: {average}%</p></div>
                     </div>
-                    {average !== null && (
-    <div className={styles.sliderWrapper} style={{ position: 'relative' }}>
-        <input
-            type="range"
-            min="0"
-            max="100"
-            value={average}
-            className={`${styles.averageSlider}`}
-            readOnly
-        />
-<div className={styles.averageLabel}><p>Average Response: {average}%</p></div>    </div>
-)}
-                </>
-            
+                )}
+            </>
         </div>
     );
 };
